@@ -11,10 +11,10 @@ public class ClienteDAO {
     //Classe responsável por fazer a tradução dos objetos para o banco de dados
 
     private final String TABLE_CLIENTES = "Clientes";
-    private DbGateway gw;
+    private DbGateway gateway;
 
     public ClienteDAO(Context ctx){
-        gw = DbGateway.getInstance(ctx);
+        gateway = DbGateway.getInstance(ctx);
     }
 
     //CREATE
@@ -29,15 +29,15 @@ public class ClienteDAO {
         cv.put("UF", uf);
         cv.put("Vip", vip ? 1 : 0);
         if(id > 0)
-            return gw.getDatabase().update(TABLE_CLIENTES, cv, "ID=?", new String[]{ id + "" }) > 0;
+            return gateway.getDatabase().update(TABLE_CLIENTES, cv, "ID=?", new String[]{ id + "" }) > 0;
         else
-            return gw.getDatabase().insert(TABLE_CLIENTES, null, cv) > 0;
+            return gateway.getDatabase().insert(TABLE_CLIENTES, null, cv) > 0;
     }
     //READ
     public List<Cliente> retornarTodos(){
         List<Cliente> clientes = new ArrayList<>();
         try {
-            Cursor cursor = gw.getDatabase().rawQuery("SELECT * FROM Clientes", null);
+            Cursor cursor = gateway.getDatabase().rawQuery("SELECT * FROM Clientes", null);
             while(cursor.moveToNext()){
                 int id = cursor.getInt(cursor.getColumnIndex("ID"));
                 String nome = cursor.getString(cursor.getColumnIndex("Nome"));
@@ -55,7 +55,7 @@ public class ClienteDAO {
     //READ
     public Cliente retornarUltimo(){
         try {
-            Cursor cursor = gw.getDatabase().rawQuery("SELECT * FROM Clientes ORDER BY ID DESC", null);
+            Cursor cursor = gateway.getDatabase().rawQuery("SELECT * FROM Clientes ORDER BY ID DESC", null);
             if(cursor.moveToFirst()){
                 int id = cursor.getInt(cursor.getColumnIndex("ID"));
                 String nome = cursor.getString(cursor.getColumnIndex("Nome"));
@@ -72,7 +72,7 @@ public class ClienteDAO {
     }
     //DELETE
     public boolean excluir(int id){
-        return gw.getDatabase().delete(TABLE_CLIENTES, "ID=?", new String[]{ id + "" }) > 0;
+        return gateway.getDatabase().delete(TABLE_CLIENTES, "ID=?", new String[]{ id + "" }) > 0;
     }
 
 
