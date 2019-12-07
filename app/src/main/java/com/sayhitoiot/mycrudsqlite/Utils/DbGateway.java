@@ -9,6 +9,8 @@ public class DbGateway {
 
     private DbGateway(Context ctx){
         DbHelper helper = new DbHelper(ctx);
+
+        //Cria e / ou abre um banco de dados que será usado para leitura e gravação.
         db = helper.getWritableDatabase();
     }
 

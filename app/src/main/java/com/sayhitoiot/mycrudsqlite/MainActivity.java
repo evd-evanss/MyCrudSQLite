@@ -70,8 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.includemain).setVisibility(View.INVISIBLE);
                 findViewById(R.id.includecadastro).setVisibility(View.VISIBLE);
                 findViewById(R.id.fab).setVisibility(View.INVISIBLE);
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
+
             }
         });
 
