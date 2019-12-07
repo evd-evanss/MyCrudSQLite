@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     RadioGroup rgSexo;
     CheckBox chkVip;
     RecyclerView recyclerView;
-    ClienteAdapter adapter;
+    ClienteAdapter adapterCliente;
     Cliente clienteEditado = null;
 
     @Override
@@ -105,10 +105,10 @@ public class MainActivity extends AppCompatActivity {
                 if(sucesso) {
                     Cliente cliente = dao.retornarUltimo();
                     if(clienteEditado != null){
-                        adapter.atualizarCliente(cliente);
+                        adapterCliente.atualizarCliente(cliente);
                         clienteEditado = null;
                     }else
-                        adapter.adicionarCliente(cliente);
+                        adapterCliente.adicionarCliente(cliente);
 
                     //limpa os campos
                     txtNome.setText("");
@@ -151,10 +151,10 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // Adiciona o adapter que irá anexar os objetos à lista.
+        // Adiciona o adapterCliente que irá anexar os objetos à lista.
         ClienteDAO dao = new ClienteDAO(this);
-        adapter = new ClienteAdapter(dao.retornarTodos());
-        recyclerView.setAdapter(adapter);
+        adapterCliente = new ClienteAdapter(dao.retornarTodos());
+        recyclerView.setAdapter(adapterCliente);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }
 
